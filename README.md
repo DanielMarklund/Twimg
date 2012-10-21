@@ -30,21 +30,21 @@ Author: Daniel Marklund [@MMarklund] [http://www.danielmarklund.com]
 
 ## API:
 
- ### Description:
+### Description:
 
      This API will output a specific amount of tweets and its images through JSON.
 
- ### Additional parameters:
+### Additional parameters:
 
      [count]>    Get a custom amount of entries.
      [since]>    Only select tweets with the Twitter ID equal to or higher than value.
      [exclude]>  Exclude a specific Twitter ID. (To prevent duplicates when using [since])
 
- ### Usage:
+### Usage:
 
      The API is accessed from 'api.php', and will return by default 20 entries from the database.
 
- ### PHP Example:
+### PHP Example:
 
      <?php
 
