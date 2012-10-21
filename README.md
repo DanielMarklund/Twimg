@@ -6,20 +6,20 @@ Author: Daniel Marklund [@MMarklund] [http://www.danielmarklund.com]
 
 ------------------------------
 
-## Features:
+### Features:
 
     * Get tweets from twitter public search API based on keyword.
     * Fetch the Instagram image associated with the tweet, from the Instagram oembed API.
     * Store a specific amount of entries (tweet & image) in a database table and truncate in case of overflow.
 
-## Todo:
+### Todo:
 
     * Make a config.php file for easier configuration.
     * Add more image sources like facebook, imgur etc.
     * Create a new API parameter to control image sources.
     * Add Twitter Streaming API functionality.
 
-## Files:
+### Files:
 
     * [api.php]>    The JSON API file which will be accessed by external users.
     * [db.php]>     Where all the database queries are stored.
@@ -30,21 +30,21 @@ Author: Daniel Marklund [@MMarklund] [http://www.danielmarklund.com]
 
 #API:
 
- ##Description:
+ ### Description:
 
      This API will output a specific amount of tweets and its images through JSON.
 
- ##Additional parameters:
+ ### Additional parameters:
 
      [count]>    Get a custom amount of entries.
      [since]>    Only select tweets with the Twitter ID equal to or higher than value.
      [exclude]>  Exclude a specific Twitter ID. (To prevent duplicates when using [since])
 
- ##Usage:
+ ### Usage:
 
      The API is accessed from 'api.php', and will return by default 20 entries from the database.
 
- ##PHP Example:
+ ### PHP Example:
 
      <?php
 
