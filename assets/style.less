@@ -1,0 +1,42 @@
+body {
+    background-color: #000;
+    color: #fff;
+}
+
+#tweetmachine {
+    width: 100%;
+
+    article {
+        max-width: 20%;
+        position: relative;
+        float: left;
+
+        img {
+            max-width: 100%;
+        }
+
+        .info {
+            float: left;
+            position: absolute;
+            top: 0;
+            min-height: 100%;
+            max-height: 100%;
+            min-width: 100%;
+            max-width: 100%;
+            opacity: 0;
+            color: #fff;
+            z-index: 999;
+            background-color: rgba(0,0,0,0.75);
+
+            > * {
+                padding: 20px;
+            }
+        }
+
+        &:hover {
+            .info {
+                opacity: 1;
+            }
+        }
+    }
+}

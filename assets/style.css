@@ -1,0 +1,2 @@
+body{background-color:#000;color:#fff}#tweetmachine{width:100%}#tweetmachine article{max-width:20%;position:relative;float:left}#tweetmachine article img{max-width:100%}#tweetmachine article .info{float:left;position:absolute;top:0;min-height:100%;max-height:100%;min-width:100%;max-width:100%;opacity:0;color:#fff;z-index:999;background-color:rgba(0,0,0,.75)}#tweetmachine article .info>*{padding:20px}#tweetmachine article:hover .info{opacity:1}
+/* This beautiful CSS-File has been crafted with LESS (lesscss.org) and compiled by simpLESS (wearekiss.com/simpless) */
