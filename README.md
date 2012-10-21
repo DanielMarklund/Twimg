@@ -1,4 +1,4 @@
-#Twimg
+# Twimg
 
 Twimg is used to fetch tweets and its linked images based upon keywords, from Twitter. It stores the results in a database for easy caching. Comes with an API.
 
@@ -32,7 +32,7 @@ Author: Daniel Marklund [@MMarklund] [http://www.danielmarklund.com]
 
 ### Description:
 
-     This API will output a specific amount of tweets and its images through JSON.
+This API will output a specific amount of tweets and its images through JSON.
 
 ### Additional parameters:
 
@@ -42,7 +42,7 @@ Author: Daniel Marklund [@MMarklund] [http://www.danielmarklund.com]
 
 ### Usage:
 
-     The API is accessed from 'api.php', and will return by default 20 entries from the database.
+The API is accessed from 'api.php', and will return by default 20 entries from the database.
 
 ### PHP Example:
 
