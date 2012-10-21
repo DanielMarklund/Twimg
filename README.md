@@ -28,40 +28,40 @@ Files:
 
 ------------------------------
 
-API:
+#API:
 
-    Description:
+ Description:
 
-        This API will output a specific amount of tweets and its images through JSON.
+     This API will output a specific amount of tweets and its images through JSON.
 
-    Additional parameters:
+ Additional parameters:
 
-        [count]>    Get a custom amount of entries.
-        [since]>    Only select tweets with the Twitter ID equal to or higher than value.
-        [exclude]>  Exclude a specific Twitter ID. (To prevent duplicates when using [since])
+     [count]>    Get a custom amount of entries.
+     [since]>    Only select tweets with the Twitter ID equal to or higher than value.
+     [exclude]>  Exclude a specific Twitter ID. (To prevent duplicates when using [since])
 
-    Usage:
+ Usage:
 
-        The API is accessed from 'api.php', and will return by default 20 entries from the database.
+     The API is accessed from 'api.php', and will return by default 20 entries from the database.
 
-    PHP Example:
+ PHP Example:
 
-        <?php
+     <?php
 
-        $data = file_get_contents('/api.php?count=20&since=260073572528164864');
-        $tweets = json_decode($data);
+     $data = file_get_contents('/api.php?count=20&since=260073572528164864');
+     $tweets = json_decode($data);
 
-        foreach ($tweets as &$tweet) { ?>
+     foreach ($tweets as &$tweet) { ?>
 
-            <article data-id="<?=$tweet->t_id;?>">
-                <img src="<?=$tweet->imageUrl;?>" alt="" />
-                <div>
-                    <h1>
-                        <img src="<?=$tweet->profileImageUrl;?>" alt="<?=$tweet->profileUsername;?>" />
-                        <a href="https://twitter.com/<?=$tweet->profileUsername;?>">@<?=$tweet->profileUsername;?></a>
-                    </h1>
-                    <p><?=$tweet->text;?></p>
-                </div>
-            </article>
-        
-        <?php } ?>
+         <article data-id="<?=$tweet->t_id;?>">
+             <img src="<?=$tweet->imageUrl;?>" alt="" />
+             <div>
+                 <h1>
+                     <img src="<?=$tweet->profileImageUrl;?>" alt="<?=$tweet->profileUsername;?>" />
+                     <a href="https://twitter.com/<?=$tweet->profileUsername;?>">@<?=$tweet->profileUsername;?></a>
+                 </h1>
+                 <p><?=$tweet->text;?></p>
+             </div>
+         </article>
+     
+     <?php } ?>
