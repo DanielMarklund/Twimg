@@ -1,0 +1,91 @@
+body {
+    background: url(navy_blue.png);
+    color: #fff;
+}
+
+#tweetmachine {
+    max-width: 1020px;
+    clear: both;
+    overflow: hidden;
+    margin: 0 auto;
+
+    article {
+        width: 20%;
+        position: relative;
+        float: left;
+        overflow: hidden;
+
+        img {
+            max-width: 100%;
+        }
+
+        .info {
+            float: left;
+            position: absolute;
+            top: 0;
+            min-height: 100%;
+            max-height: 100%;
+            min-width: 100%;
+            max-width: 100%;
+            display: none;
+            color: #fff;
+            z-index: 999;
+            background-color: rgba(0,0,0,0.75);
+
+            a {
+                color: #fff;
+                font-weight: bold;
+                text-decoration: none;
+            }
+
+            p {
+                margin-top: -20px;
+            }
+
+            > * {
+                padding: 20px;
+            }
+        }
+
+        &:hover {
+            .info {
+                display: block;
+            }
+        }
+
+        &.new {
+            display: none;
+        }
+    }
+}
+
+
+
+
+/* #Media Queries
+================================================== */
+
+    /* Smaller than standard 960 (devices and browsers) */
+    @media only screen and (max-width: 959px) {
+        #tweetmachine article {
+            width: 25%;
+        }
+    }
+
+    /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+    @media only screen and (min-width: 480px) and (max-width: 767px) {
+      
+        #tweetmachine article {
+            width: 50%;
+        }
+
+    }
+
+    /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+    @media only screen and (max-width: 479px) {
+      
+      #tweetmachine article {
+            width: 100%;
+        }
+
+    }

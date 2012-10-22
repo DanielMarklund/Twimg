@@ -10,7 +10,7 @@ Author: Daniel Marklund [@MMarklund] [http://www.danielmarklund.com]
 
 * Get tweets from twitter public search API based on keyword.
 * Fetch the Instagram image associated with the tweet, from the Instagram oembed API.
-* Store a specific amount of entries (tweet & image) in a database table and truncate in case of overflow.
+* Store a specific amount of entries (tweet & image) in a database table.
 
 ### Todo:
 

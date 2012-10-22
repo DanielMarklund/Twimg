@@ -2,27 +2,27 @@
 
 include_once('db.php');
 
-// Initiate The Amazing Twitter Image Machine with a keyword to search for.
-TweetMachine::fetchTweets('lol');
+// Initiate fetch
+TweetFetcher::fetchTweets(Config::getVar("fetch.tag"));
 
-class TweetMachine
+class TweetFetcher
 {
 
     public static function fetchTweets($keyword) {
-        
-        // If number of rows exceeds specific number, truncate the table
-        if(Database::countRows() > 100) {
-            Database::truncateTable();
-        }
 
-        $tag = urlencode("-RT ".$keyword." instagram.com filter:links");
-        $count = 20; // How many tweets to fetch for every request
+        $tag = urlencode("-RT ".$keyword." filter:links");
 
-        $data = TweetMachine::getTweetsWithLink($tag, $count);
+        // Check for count parameter in querystring
+        if (isset($_GET['count']) && is_numeric($_GET['count']))
+            $count = $_GET['count'];
+        else
+            $count = Config::getVar("fetch.count");
+
+        // Get the tweets
+        $data = TweetFetcher::getTweetsWithLink($tag, $count);
 
         foreach($data->results as $key=>$value) 
         {
-
             $datetime                   = $value->created_at;
             $tweet['date']              = date('M d, Y', strtotime($datetime));
             $tweet['time']              = date('g:ia', strtotime($datetime));
@@ -30,17 +30,34 @@ class TweetMachine
             $tweet['profileImageUrl']   = $value->profile_image_url;
             $tweet['text']              = $value->text;
             $tweet['t_id']              = $value->id_str;
+            $success                    = false;
 
             if (!empty($value->entities->urls)) {
                 foreach ($value->entities->urls as $url) {
+
+                    // If Instagram URL
                     if (preg_match("/insta/i", $url->expanded_url))
                     {
-                        $tweet['imageUrl'] = TweetMachine::getInstagramUrl("$url->expanded_url");
-                        Database::insertTweet($tweet);
+                        $tweet['imageUrl'] = TweetFetcher::getInstagramUrl("$url->expanded_url");
+
+                        // Add entry to database if URL responds correctly
+                        if(TweetFetcher::checkUrl($tweet['imageUrl'])) {
+                            $success = true;
+                            Database::insertTweet($tweet);
+                        }
                     }
                 }
             }
 
+            if($success){ TweetFetcher::cleanRows(); }
+
+        }
+    }
+
+    static function cleanRows() {
+        // If number of rows exceeds specific number, delete a row to make place for the new
+        if(Database::countRows() >= Config::getVar("db.max")) {
+            Database::deleteRows(1);
         }
     }
 
@@ -58,6 +75,18 @@ class TweetMachine
         $image = $data->url;
 
         return $image;
+    }
+
+    static function checkUrl($url) {
+        $headers    = get_headers($url);
+        $match      = strpos($headers[0], '200');
+        $forbidden  = strpos($headers[0], '403');
+
+        // Check if URL is responding correctly (200 = OK)
+        if(!empty($match) && empty($forbidden))
+            return true;
+        else
+            return false;
     }
 
 }

@@ -2,13 +2,13 @@
 
 header('Content-type: application/json');
 require_once('db.php');
-require_once('globals.php');
+include_once('config.php');
 
 // Get a specific count of results
 if (isset($_GET['count']) && is_numeric($_GET['count']))
     $count = $_GET['count'];
 else
-    $count = 20;
+    $count = Config::getVar("api.count");
 
 // Only get results with a Twitter ID counting from...
 if (isset($_GET['since']) && is_numeric($_GET['since']))
@@ -22,6 +22,7 @@ if (isset($_GET['exclude']) && is_numeric($_GET['exclude']))
 else
     $exclude = 0;
 
-$tweets = json_encode(Database::getTweets($count, $since, $exclude));
+$tweets = Database::getTweets($count, $since, $exclude);
 
-echo $tweets;
+// If no tweets were returned, display error
+if ($tweets === false){} else { echo json_encode($tweets); }
