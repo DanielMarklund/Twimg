@@ -14,7 +14,6 @@ Author: Daniel Marklund [@MMarklund] [http://www.danielmarklund.com]
 
 ### Todo:
 
-* Make a config.php file for easier configuration.
 * Add more image sources like facebook, imgur etc.
 * Create a new API parameter to control image sources.
 * Add Twitter Streaming API functionality.
@@ -46,22 +45,34 @@ The API is accessed from 'api.php', and will return by default 20 entries from t
 
 ### PHP Example:
 
-     <?php
+    <?php 
 
-     $data = file_get_contents('/api.php?count=20&since=260073572528164864');
-     $tweets = json_decode($data);
+    $data = @file_get_contents('http://localhost/twimg/api.php?count=20');
 
-     foreach ($tweets as &$tweet) { ?>
+    // Check for connection errors
+    if ($data === false) { print "There was an error trying to connect to the API. Check the URL"; $tweets = "";}
+    else { $tweets = json_decode($data); }
 
-         <article data-id="<?=$tweet->t_id;?>">
-             <img src="<?=$tweet->imageUrl;?>" alt="" />
-             <div>
-                 <h1>
-                     <img src="<?=$tweet->profileImageUrl;?>" alt="<?=$tweet->profileUsername;?>" />
-                     <a href="https://twitter.com/<?=$tweet->profileUsername;?>">@<?=$tweet->profileUsername;?></a>
-                 </h1>
-                 <p><?=$tweet->text;?></p>
-             </div>
-         </article>
-     
-     <?php } ?>
+    // If tweets were returned, print all results
+    if(isset($tweets) && !empty($tweets))
+    {
+        foreach ($tweets as &$tweet) { ?>
+            <a href="https://twitter.com/<?=$tweet->profileUsername?>/status/<?=$tweet->t_id?>">
+                <article data-id="<?=$tweet->t_id;?>">
+                        <img src="<?=$tweet->imageUrl;?>" alt="" />
+                    <div class="info">
+                        <header>
+                            <div class="avatar">
+                                <img src="<?=$tweet->profileImageUrl;?>" alt="<?=$tweet->profileUsername;?>"  />
+                            </div>
+                            <div class="">
+                                <a href="https://twitter.com/<?=$tweet->profileUsername;?>">@<?=$tweet->profileUsername;?></a>
+                            </div>
+                        </header>
+                        <p><?=$tweet->text;?></p>
+                    </div>
+                </article>
+            </a>
+    <?php 
+        }
+    } ?>
