@@ -2,7 +2,7 @@
 
 /* Fetching */
 
-Config::setVar("fetch.tag", 'lol'); // Keywords for twitter search [DEFAULT:20]
+Config::setVar("fetch.tag", 'lol OR cat OR dog OR hello OR morning'); // Keywords for twitter search [DEFAULT:20]
 Config::setVar("fetch.count", 20); // How many tweets to fetch [DEFAULT:20]
 
 /* API */

@@ -27,7 +27,7 @@ $(document).ready(function() {
             dataType: 'html'
         });
 
-    }, 1000);
+    }, 100);
 
     function displayEntry(tweets) {
         $.each(tweets, function(key,valueObj){
